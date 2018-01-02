@@ -25,7 +25,7 @@ public class LineTest {
     public LineTest() {
         initFrame(); //init's the frame
         setupPoints();
-        network = new OneLayerNetwork(3, 100, 1, 0.50, Activation.TAHN, Activation.DTAHN);
+        network = new OneLayerNetwork(3, 100, 1, 0.50, Activation.TAHN);
         loop(); //starts the loop
     }
 

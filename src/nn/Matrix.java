@@ -9,11 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Matrix implements Serializable{
 
     //static var's
-    public static final String TANH = "tanh";
-    public static final String DTANH = "dtanh";
-    public static final String SIGMOID = "sigmoid";
-    public static final String DSIGMOID = "dsigmoid";
-    public static final String MUTATE = "mutate";
     public static double lowerMutate = -0.1;
     public static double higherMutate = 0.1;
 
@@ -126,7 +121,6 @@ public class Matrix implements Serializable{
         for (int i = 0; i < result.rows; i++) {
             for (int j = 0; j < result.cols; j++) {
                 switch (formule){
-
                     case TAHN:
                         result.matrix[i][j] = tanh(m.matrix[i][j]);
                         break;
@@ -141,6 +135,12 @@ public class Matrix implements Serializable{
                         break;
                     case MUTATE:
                         result.matrix[i][j] = mutate(m.matrix[i][j]);
+                        break;
+                    case RELU:
+                        result.matrix[i][j] = relu(m.matrix[i][j]);
+                        break;
+                    case DRELU:
+                        result.matrix[i][j] = dRelu(m.matrix[i][j]);
                         break;
                 }
             }
@@ -211,6 +211,17 @@ public class Matrix implements Serializable{
 
     private static double dtanh(double x) {
         return 1 / (Math.pow(Math.cosh(x), 2));
+    }
+
+    private static double relu(double x){
+        return Math.max(0.0f, x);
+    }
+
+    private static double dRelu(double x){
+        if (x > 0)
+            return 1.0f;
+        else
+            return 0.0f;
     }
 
     // This is how we adjust weights ever so slightly

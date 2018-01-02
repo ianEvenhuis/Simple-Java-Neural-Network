@@ -5,8 +5,8 @@ public class OneLayerNetwork extends NeuralNetwork {
     private int hnodes;
 
     // Neural Network constructor function
-    public OneLayerNetwork(int inputnodes, int hiddennodes, int outputnodes, double learning_rate, Activation Activation, Activation derivative) {
-        super(Activation, derivative);
+    public OneLayerNetwork(int inputnodes, int hiddennodes, int outputnodes, double learning_rate, Activation Activation) {
+        super(Activation);
         // Number of nodes in layer (input, hidden, output)
         // This network is limited to 3 layers
         this.inodes = inputnodes;
@@ -58,13 +58,13 @@ public class OneLayerNetwork extends NeuralNetwork {
         // Hidden errors is output error multiplied by weights (who)
         Matrix hidden_errors = Matrix.dot(whoT, output_errors);
         // Calculate the gradient, this is much nicer in python!
-        Matrix gradient_output = Matrix.map(outputs, this.derivative);
+        Matrix gradient_output = Matrix.map(outputs, this.Activation.getDerivative());
         // Weight by errors and learing rate
         gradient_output.multiply(output_errors);
         gradient_output.multiply(this.learnRate);
 
         // Gradients for next layer, more back propogation!
-        Matrix gradient_hidden = Matrix.map(hidden_outputs, this.derivative);
+        Matrix gradient_hidden = Matrix.map(hidden_outputs, this.Activation.getDerivative());
         // Weight by errors and learning rate
         gradient_hidden.multiply(hidden_errors);
         gradient_hidden.multiply(this.learnRate);

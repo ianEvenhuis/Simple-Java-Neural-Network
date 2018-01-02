@@ -5,16 +5,14 @@ import java.io.*;
 public abstract class NeuralNetwork implements Serializable {
 
     public final Activation Activation;
-    public final Activation derivative;
     public double learnRate;
     public int inodes;
     public int onodes;
     public Matrix wih;
     public Matrix who;
 
-    public NeuralNetwork(Activation Activation, Activation derivative) {
+    public NeuralNetwork(Activation Activation) {
         this.Activation = Activation;
-        this.derivative = derivative;
     }
 
     public abstract double[] query(double[] inputs_array);
