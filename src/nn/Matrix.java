@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Matrix implements Serializable{
+public class Matrix implements Serializable {
 
     //static var's
     public static double lowerMutate = -0.1;
@@ -120,7 +120,7 @@ public class Matrix implements Serializable{
         Matrix result = new Matrix(m.rows, m.cols);
         for (int i = 0; i < result.rows; i++) {
             for (int j = 0; j < result.cols; j++) {
-                switch (formule){
+                switch (formule) {
                     case TAHN:
                         result.matrix[i][j] = tanh(m.matrix[i][j]);
                         break;
@@ -213,11 +213,11 @@ public class Matrix implements Serializable{
         return 1 / (Math.pow(Math.cosh(x), 2));
     }
 
-    private static double relu(double x){
+    private static double relu(double x) {
         return Math.max(0.0f, x);
     }
 
-    private static double dRelu(double x){
+    private static double dRelu(double x) {
         if (x > 0)
             return 1.0f;
         else
@@ -226,7 +226,7 @@ public class Matrix implements Serializable{
 
     // This is how we adjust weights ever so slightly
     private static double mutate(double x) {
-        if (ToolBox.random(1) < 0.1) {
+        if (random(1) < 0.1) {
             return x + random(lowerMutate, higherMutate);
         } else {
             return x;
@@ -236,7 +236,11 @@ public class Matrix implements Serializable{
 
     //<editor-fold desc="Getters and Setters">
     public static double random(double min, double max) {
-        return ThreadLocalRandom.current().nextDouble(min, max + 1);
+        return ThreadLocalRandom.current().nextDouble(min, max);
+    }
+
+    public static double random(int max) {
+        return random(0, max);
     }
 
     public double[][] getMatrix() {
